@@ -1,0 +1,170 @@
+\documentclass[a4paper,zihao=-4,notitlepage,oneside,openright]{ctexart}
+
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=3.0cm,bottom=3.0cm,headheight=1.5cm,footskip=1.75cm}
+
+\usepackage[toc]{multitoc}
+\usepackage{caption}
+\usepackage{floatrow}
+\usepackage{float}
+\usepackage{threeparttable}
+
+\usepackage{xcolor}
+\definecolor{bjtudarkblue}{HTML}{10307E}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.2}
+
+
+\let\oldverbatim=\verbatim
+\let\endoldverbatim=\endverbatim
+\renewenvironment{verbatim}{\begin{oldverbatim}\vspace{-0.5cm}\color{red}\textbf}{\vspace{-0.3cm}\end{oldverbatim}\ignorespacesafterend}
+
+
+\title{\textbf{\heiti\color{bjtudarkblue}B{\zihao{-4}JTU}B{\zihao{-4}EAMER}：北京交通大学（非官方）\\Beamer 主题}}
+\author{Q.~Tang\\{\zihao{-4}qitang@bjtu.edu.cn}}
+\date{\zihao{-4}v1.0.0 (2022/05/20)}
+
+\ctexset{
+	abstractname = {\heiti\zihao{-4} 摘要},
+	contentsname = {\centering\zihao{-4} \textbf{目录}\\},
+    section = {
+        format=\raggedright\heiti\zihao{-3},
+        beforeskip={24pt},
+        afterskip={18pt},
+    },
+    subsection = {
+        format=\raggedright\heiti\zihao{4},
+        beforeskip={24pt},
+        afterskip={18pt},
+    },
+    paragraph = {
+    	format = \centering\heiti\zihao{-4}\textbf\\,
+    	beforeskip={32pt},
+    	afterskip={24pt},
+    },
+}
+
+\usepackage{titletoc}
+\titlecontents{section}[3em]{\hspace{0em}}{\songti\contentslabel{2em}}{\songti \zihao{-4}}{\titlerule*[0.3pc]{.}\contentspage}[\vspace{0ex}]
+
+\DeclareCaptionFont{bjtusongti}{\zihao{5}\songti}
+\captionsetup{font=bjtusongti}
+
+\DeclareFloatFont{bjtusongti}{\zihao{5}\songti}
+\DeclareFloatVCode{tableafterfloat}{\vspace{-4pt}}
+\floatsetup[table]{font=bjtusongti,capposition=top,captionskip=2pt,postcode=tableafterfloat}
+
+\begin{document}
+\maketitle
+
+\abstract{B{\zihao{-6}JTU}B{\zihao{-6}EAMER} 主题为作者基于本科毕业设计中使用的 PPT 模板制作，旨在提供对应风格的 Beamer 制作方式，可用于学位答辩、课堂演示、学术交流或其他需要演示文稿的活动，方便地使用 \LaTeX{} 制作含有学校特色的演示文稿。}
+
+\paragraph{使用说明}
+\begin{enumerate}
+	\item 本主题为作者个人制作，非官方模板，含有学校特色的主题素材版权归北京交通大学所有， 使用仅供参考， 任何由于使用本主题而引起的任何问题均与本主题作者无关。
+	\item 任何个人或组织以本模板为基础进行修改、扩展而生成的新的专用模板， 请严格遵守有关协议。由于违犯协议而引起的任何纠纷争端均与本模板作者无关。
+	\item 由于作者水平有限，当前版本重在实现原 PPT 模板的风格，欢迎喜欢该主题风格的朋友基于当前版本改进。
+\end{enumerate}
+
+\tableofcontents
+
+\setcounter{page}{0}
+\thispagestyle{empty}
+\newpage
+
+\section{模板介绍}
+
+
+BJTUBEAMER (Beijing Jiaotong University \LaTeX{} Beamer Template) 是为了尽可能地还原作者在本科毕业设计中使用的 PPT 模板风格，从而可以方便地使用 \LaTeX{} 进行制作，本文档将对该模板的使用方法进行简单介绍，非常欢迎对 Beamer 主题制作有更深层次了解的朋友对本主题的设计、开发做出贡献。
+下表列出了 BJTUBEAMER 的主要文件及其介绍：
+
+
+\begin{table}[!htbp]
+\centering
+\caption{B{\zihao{-6}JTU}B{\zihao{-6}EAMER} 文件及其介绍表}
+\begin{threeparttable}
+\begin{tabular}{c|c}
+\toprule[2pt]
+文件（夹）&描述	\\\hline
+beamerthemebjtubeamer.sty&演示主题，控制演示稿的的每一细节的外观\\\hline
+beamerinnerthemebjtubeamer.sty&内部主题，控制着排版演示稿的什么元素\\\hline
+beamercolorthemebjtubeamer.sty&色彩主题，设置幻灯片各部分的配色\\\hline
+beamerfontthemebjtubeamer.sty&字体主题，控制着演示稿使用的字体的属性\\\hline
+resources/&主题相关素材存储文件夹\\\hline
+figures/&用户制作演示文稿图片存储文件夹\\\hline
+main.tex&主题测试文件\\\hline
+bjtubeamer.pdf&用户手册（本文档）\\\bottomrule[2pt]
+\end{tabular}
+\begin{tablenotes}
+     \item[1] 使用前，请仔细阅读 bjtubeamer.pdf，即本文档。
+   \end{tablenotes}
+   \end{threeparttable}
+\end{table}
+
+\section{使用说明}
+
+\begin{verbatim}
+	\title{<arg1>}
+\end{verbatim}
+中文标题
+
+\begin{verbatim}
+	\englishtitle{<arg1>}
+\end{verbatim}
+英文标题
+
+\begin{verbatim}
+	\author{<arg1>}
+\end{verbatim}
+作者/答辩人
+
+\begin{verbatim}
+	\studentNumber{<arg1>}
+\end{verbatim}
+学号
+
+\begin{verbatim}
+	\advisor{<arg1>}
+\end{verbatim}
+指导教师
+
+\begin{verbatim}
+	\institution{<arg1>}
+\end{verbatim}
+所在学院/实验室
+
+\begin{verbatim}
+	\defense{<arg1>}
+\end{verbatim}
+Beamer 所用场合，学位答辩/课堂展示
+
+\begin{verbatim}
+	\maketitle
+\end{verbatim}
+生成封面页
+
+\begin{verbatim}
+	\makecontent
+\end{verbatim}
+生成目录页
+
+\begin{verbatim}
+	\makebackcover
+\end{verbatim}
+生成封底页
+
+\begin{verbatim}
+	\section{<arg1>}
+\end{verbatim}
+对 LATEX 的命令进行了重新定义，除了保留原有的功能外，同时会生成一个新的章节封面，改封面同时会展示当前章节的 subsection 结构。
+
+\begin{verbatim}
+	\background{<arg1>}
+\end{verbatim}
+设置当前 frame 的背景图片
+
+\end{document}
