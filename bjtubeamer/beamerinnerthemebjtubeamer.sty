@@ -1,0 +1,73 @@
+%%
+%% This is file `beamerinnerthemebjtubeamer.sty'
+%%
+%% ------------------------------------------------------------------------
+%% Copyright (C) 2021,2022 Q.Tang
+%% 
+%% Licensed under the Apache License, Version 2.0 (the "License");
+%% you may not use this file except in compliance with the License.
+%% You may obtain a copy of the License at
+%% 
+%%     http://www.apache.org/licenses/LICENSE-2.0
+%% 
+%% Unless required by applicable law or agreed to in writing, software
+%% distributed under the License is distributed on an "AS IS" BASIS,
+%% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% See the License for the specific language governing permissions and
+%% limitations under the License.
+%% ------------------------------------------------------------------------
+
+\mode<presentation>
+%========================================================================%
+% 设置页面风格
+%========================================================================%
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \iftoggle{cover}{%封面页
+    \node[anchor=south west, inner sep=0] at (\bjtutitlebackgroundmove) {\includegraphics[width=\the\paperwidth,height=\the\paperheight]{\bjtutitlebackground}};
+    \node[anchor=north east, inner sep=0] at (\bjtutitlelogomove) {\includegraphics[height=\bjtutitlelogoheight]{\bjtutitlelogo}};
+    \node[anchor=north east, inner sep=0] at (\bjtutitleleftlogomove) {\includegraphics[height=\bjtutitlehammerlogoheight]{\bjtutitlehammerlogo}};
+    \node[anchor=north east, inner sep=0] at (\bjtutitlerightlogomove) {\includegraphics[height=\bjtutitlebooklogoheight]{\bjtutitlebooklogo}};
+	\draw[color=\bjtuorange,thick] (1.5,6.2)--(8.5,6.2);
+
+  }{
+  	\ifboolexpr{not(togl{content} or togl{sectioncover} or togl{backcover})}{%内容页
+    	\node[anchor=north east, inner sep=0] at (\the\paperwidth-4.5mm,\the\paperheight-2mm) {\includegraphics[height=\bjtuframeheaderheight]{\bjtuframelogo}};
+		\node[anchor=north east, inner sep=0] at (\the\paperwidth-153mm,\the\paperheight-2mm) {\includegraphics[height=\bjtuframebooklogoheight]{\bjtutitlebooklogo}};
+		\node[anchor=north east, inner sep=0] at (\the\paperwidth-35.5mm,\the\paperheight-2mm) {\includegraphics[height=\bjtuframeheaderheight]{\bjtuframeheader}};
+    	\draw[color=\bjtuorange,thick] (1,0.5)--(15,0.5);	
+  	}{%其它	
+  		
+     }
+  }
+  
+  \end{tikzpicture}
+}
+
+% 封面页排版
+\defbeamertemplate*{title page}{bjtubeamer}
+{
+	\setbeamertemplate{footline}{}
+   \vskip \dimexpr(\bjtutitlelogoheight+1mm)%
+   \begin{beamercolorbox}{title page header}
+   \usebeamerfont*{institution}~~~~~~~~~北京交通大学\bjtu@value@institution\bjtu@value@defense\par%
+   \end{beamercolorbox}
+   \vskip 5mm 
+   \begin{beamercolorbox}{title page header}
+      \usebeamerfont*{title}\centering\bjtu@value@title\par%
+      \vskip 2mm
+      \usebeamerfont*{englishtitle}\centering\bjtu@value@englishtitle\par%
+    \end{beamercolorbox}%
+    \vskip 0.25cm%
+    \begin{beamercolorbox}{author}
+      \usebeamerfont{author}~~~~~~~~~~~~~~~~~~答辩人：\bjtu@value@author~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~指导教师：\bjtu@value@advisor%
+    \end{beamercolorbox}
+     \vskip 0.25cm%
+    \begin{beamercolorbox}{date}
+      \usebeamerfont{author}~~~~~~~~~~~~~~~~~~学号：\bjtu@value@studentNumber~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~答辩时间：\insertdate%
+    \end{beamercolorbox}
+  \vfill
+}
+\mode
+<all>

@@ -1,0 +1,64 @@
+%%
+%% This is file `beamerouterthemebjtubeamer.sty'
+%%
+%% ------------------------------------------------------------------------
+%% Copyright (C) 2021,2022 Q.Tang
+%% 
+%% Licensed under the Apache License, Version 2.0 (the "License");
+%% you may not use this file except in compliance with the License.
+%% You may obtain a copy of the License at
+%% 
+%%     http://www.apache.org/licenses/LICENSE-2.0
+%% 
+%% Unless required by applicable law or agreed to in writing, software
+%% distributed under the License is distributed on an "AS IS" BASIS,
+%% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% See the License for the specific language governing permissions and
+%% limitations under the License.
+%% ------------------------------------------------------------------------
+
+\mode<presentation>
+%headline
+\setbeamertemplate{headline}{
+\ifboolexpr{not(togl{cover} or togl{content} or togl{sectioncover} or togl{backcover})}{\relax%
+	 \leavevmode%
+	\vskip 0.47cm
+  \begin{beamercolorbox}[wd=.8\paperwidth,ht=2.5ex,dp=1.125ex]{section in head/foot}%
+    \hspace{0.7cm}\fontsize{12}{48} \selectfont \insertsectionnavigationhorizontal{.5\paperwidth}{\hskip0pt plus1filll}{}%
+  \end{beamercolorbox}%
+}{}
+}
+
+
+%footline
+\setbeamertemplate{footline}{%
+\ifboolexpr{not(togl{cover} or togl{content} or togl{sectioncover} or togl{backcover})}{\relax%
+    \vspace*{-0.4cm}
+    \hspace{3em}%4mm
+    \usebeamercolor[fg]{page number in head/foot}%
+    \usebeamerfont{page number in head/foot}%
+    \insertframenumber\,/\,\inserttotalframenumber\kern1em%
+    \hspace{0.2cm}%
+    \vspace*{.2cm}%
+}{}
+}
+
+%章节封面的 subsection 目录
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}{
+\vskip 0.1cm
+\leavevmode\leftskip=-4ex%
+  \llap{\raisebox{0.1ex}{\textcolor{black}{$\bullet$}}\kern0.5ex}%
+\inserttocsubsection\par%
+}
+
+%内容页的帧标题
+\setbeamertemplate{frametitle}{%
+	\vspace*{5mm}
+	\begin{tikzpicture}[remember picture]
+    \node[anchor=north east, inner sep=0] at ({\the\paperwidth-158mm,\the\paperheight-5mm}) {\includegraphics[height=\bjtutitlehammerlogoheight]{\bjtuframetitlelogo}};
+    \node[anchor=north east, inner sep=0] at ({\the\paperwidth-139mm,\the\paperheight-5mm}) {\insertframetitle};
+    \end{tikzpicture}
+}
+\mode
+<all>

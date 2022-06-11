@@ -1,0 +1,208 @@
+%%
+%% This is file `beamerthemebjtubeamer.sty'
+%%
+%% ------------------------------------------------------------------------
+%% Copyright (C) 2021,2022 Q.Tang
+%% 
+%% Licensed under the Apache License, Version 2.0 (the "License");
+%% you may not use this file except in compliance with the License.
+%% You may obtain a copy of the License at
+%% 
+%%     http://www.apache.org/licenses/LICENSE-2.0
+%% 
+%% Unless required by applicable law or agreed to in writing, software
+%% distributed under the License is distributed on an "AS IS" BASIS,
+%% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% See the License for the specific language governing permissions and
+%% limitations under the License.
+%% ------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemebjtubeamer}
+
+\useinnertheme{bjtubeamer}
+\useoutertheme{bjtubeamer}
+\usecolortheme{bjtubeamer}
+\usefonttheme{bjtubeamer}
+%========================================================================%
+% 基本宏包
+%========================================================================%
+\RequirePackage{xcolor}
+\RequirePackage{tokenizer}
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{fontspec}
+\RequirePackage{etoolbox}
+\RequirePackage{amsmath}
+\RequirePackage{enumerate}
+\RequirePackage{mathtools}
+\RequirePackage{hyperref}
+\RequirePackage{fontawesome}
+\RequirePackage{xeCJK}
+\RequirePackage{ragged2e}
+\RequirePackage{blindtext}
+\RequirePackage{adjustbox}
+\RequirePackage{graphicx}
+
+\setCJKfamilyfont{STFangsong}{STFANGSO.TTF}[Path=resources/font/]
+\newcommand{\STFangsong}{\CJKfamily{STFangsong}}
+\setsansfont{Times New Roman}                
+\setmonofont{Times New Roman} 
+%========================================================================%
+% 自定义命令
+%========================================================================%
+\newtoggle{cover} 
+\newtoggle{content}
+\newtoggle{sectioncover}
+\newtoggle{backcover}
+
+%定义背景图片命令
+\newcommand\background[1]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[inner sep=0pt,outer sep=0pt,opacity=1]
+  at (current page.center)
+  {\includegraphics[width=\paperwidth,height=\paperheight]{#1}};
+\end{tikzpicture}
+}
+
+%复写标题页
+\let\originalmaketitle\maketitle
+\renewcommand{\maketitle}{
+    \global\toggletrue{cover}
+    \originalmaketitle
+    \global\togglefalse{cover}
+}
+
+\AtBeginEnvironment{titlepage}{\global\toggletrue{cover}}
+
+%定义目录页生成命令
+\newcommand{\makecontent}{
+    \global\toggletrue{content}
+    \begin{frame}
+    \background{./resources/img/content.png}
+    \addtocounter{framenumber}{-2}
+    \vspace{-0.8cm}
+	\begin{columns}
+		\begin{column}{.60\linewidth}
+		\end{column}
+		\begin{column}{.40\linewidth}
+			\tableofcontents[sectionstyle=show, hideallsubsections]
+		\end{column}
+	\end{columns}
+	\end{frame}
+    \global\togglefalse{content}
+}
+
+%复写 section 命令生成章节封面
+\let\originalsection\section
+\renewcommand{\section}[1]{
+    \global\toggletrue{sectioncover}
+    \begin{frame}[t]
+
+	\originalsection{#1}
+	\background{./resources/img/sectioncover\thesection.png}
+	\begin{tikzpicture}[remember picture,overlay]
+    	\node[xshift=10cm,yshift=4.7cm] at (current page.south west) {\fontsize{30}{48} {\bfseries\color{black}\selectfont #1}};
+    \end{tikzpicture}		
+    
+    \vskip 3.4cm
+    \begin{columns}
+		\begin{column}{.60\linewidth}
+		\end{column}
+		\begin{column}{.40\linewidth}
+			\tableofcontents[currentsection, sectionstyle=hide,subsectionstyle=show/show/hide]
+		\end{column}
+	\end{columns}
+	\end{frame}
+    \global\togglefalse{sectioncover}
+}
+
+%定义封底命令
+\newcommand{\makebackcover}{
+    \global\toggletrue{backcover}
+    \begin{frame}
+    \background{./resources/img/backcover.png}
+    \begin{tikzpicture}[remember picture,overlay]
+    	\node[xshift=-2.8cm,yshift=4.1cm] at (current page.south east) {\usebeamerfont{author}答辩人：\bjtu@value@author};
+    	\node[xshift=-2.8cm,yshift=3.4cm] at (current page.south east) {\usebeamerfont{author}指导教师：\bjtu@value@advisor};
+    \end{tikzpicture}
+    
+    \begin{columns}
+		\begin{column}{.60\linewidth}
+		
+		\end{column}
+		\begin{column}{.40\linewidth}
+		\end{column}
+	\end{columns}
+    
+    \end{frame}
+    \global\togglefalse{backcover}
+}
+
+%========================================================================%
+% 自定义内容
+%========================================================================%
+%定义默认变量
+\newcommand{\bjtuDefaults}{
+    \def \bjtutitlebackground {./resources/img/cover.png}
+    \def \bjtutitlebackgroundmove {0,.79cm} %-.1mm, -.1mm
+    
+    \def \bjtutitlelogo {./resources/vi/logo.png}
+    \def \bjtutitlehammerlogo {./resources/vi/logo_hammer.png}
+	\def \bjtutitlebooklogo {./resources/vi/logo_book.png}
+	\def \bjtuframetitlelogo {./resources/vi/logo_hammer_blue.png}
+	\def \bjtuframelogo {./resources/vi/logo.png}
+    \def \bjtuframeheader {./resources/img/header.png} 
+	
+    \def \bjtutitlelogoheight {12mm}
+    \def \bjtutitlehammerlogoheight {5mm}
+	\def \bjtutitlebooklogoheight {4mm}
+	\def \bjtuframeheaderheight {8mm}
+	\def \bjtuframebooklogoheight {6.5mm}
+	
+    
+    \def \bjtutitlelogomove {\the\paperwidth-110mm,\the\paperheight+3mm}
+	
+	
+	\def \bjtutitleleftlogomove {\the\paperwidth-143mm,\the\paperheight-22.5mm}
+	\def \bjtutitlerightlogomove {\the\paperwidth-73mm,\the\paperheight-23mm}
+    \def \bjtutitlefak {}
+    \def \bjtufak{}
+    \def \bjtuorange {bjtuorange} 
+
+}
+
+\bjtuDefaults
+
+%定义使用者需要填写的标签
+\def\bjtu@label@institution{学院名称:~}
+\def\bjtu@label@author{作者姓名:~}
+\def\bjtu@label@studentNumber{学~~~~~~号:~}
+\def\bjtu@label@advisor{导师姓名:~}
+\def\bjtu@label@defense{答辩:~}
+
+%定义上述标签的默认值
+\def\bjtu@value@institution{XXXX}
+\def\bjtu@value@author{XXXX}
+\def\bjtu@value@studentNumber{XXXX}
+\def\bjtu@value@advisor{XXXX}
+\def\bjtu@value@defense{XXXX}
+\def\bjtu@value@title{中文题目}
+\def\bjtu@value@englishtitle{}
+
+%定义用户填写上述标签对应值的命令,需要用户在主文档自行调用
+\newcommand\institution[1]{\def\bjtu@value@institution{#1}}
+\renewcommand\author[1]{\def\bjtu@value@author{#1}}
+\newcommand\studentNumber[1]{\def\bjtu@value@studentNumber{#1}}
+\newcommand\advisor[1]{\def\bjtu@value@advisor{#1}}
+\newcommand\defense[1]{\def\bjtu@value@defense{#1}}
+\newcommand\englishtitle[1]{\def\bjtu@value@englishtitle{#1}}
+\renewcommand\title[1]{\def\bjtu@value@title{#1}}
+
+\renewcommand{\today}{\number\year/\number\month/\number\day}
+
+%% 如果插入的图片没有指定扩展名，那么依次搜索下面的扩展名所对应的文件
+\DeclareGraphicsExtensions{.pdf,.eps,.png,.jpg,.jpeg}
+%========================================================================%
+% 结束
+%========================================================================%
