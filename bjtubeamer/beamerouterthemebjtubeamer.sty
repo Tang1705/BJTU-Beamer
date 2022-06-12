@@ -56,9 +56,10 @@
 \setbeamertemplate{frametitle}{%
 	\vspace*{5mm}
 	\begin{tikzpicture}[remember picture]
-    \node[anchor=north east, inner sep=0] at ({\the\paperwidth-158mm,\the\paperheight-5mm}) {\includegraphics[height=\bjtutitlehammerlogoheight]{\bjtuframetitlelogo}};
-    \node[anchor=north east, inner sep=0] at ({\the\paperwidth-139mm,\the\paperheight-5mm}) {\insertframetitle};
+    \node(hammer)[anchor=north east, inner sep=0] at ({\the\paperwidth-158mm,\the\paperheight-5mm}) {\includegraphics[height=\bjtutitlehammerlogoheight]{\bjtuframetitlelogo}};
+    \node[right=1.5mm of hammer, inner sep=0] {\insertframetitle};
     \end{tikzpicture}
+    \vspace*{-0.5cm}
 }
 \mode
 <all>
