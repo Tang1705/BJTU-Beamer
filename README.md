@@ -32,7 +32,7 @@ BJTUBeamer 主题为作者基于本科毕业设计中使用的 PPT 模板制作�
 - beamerouterthemebjtubeamer.sty 外部主题
 - beamercolorthemebjtubeamer.sty 色彩主题
 - beamerfontthemebjtubeamer.sty 字体主题
-- resources 主题相关素材文
+- resources 主题相关素材
 - figures 插图
 - main.tex 
 - main.pdf
