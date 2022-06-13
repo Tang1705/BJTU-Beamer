@@ -22,6 +22,8 @@
 \usetheme{bjtubeamer}
 \graphicspath{{figures/}}
 \usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+\usepackage{varwidth}
 
 \definecolor{gray}{HTML}{E7E6E6}
 \definecolor{darkgray}{HTML}{7F7F7F}
@@ -37,30 +39,6 @@
 \captionsetup{labelsep=twospace}
 
 \justifying\let\raggedright\justifying
-
-\newcounter{prf}[section]\setcounter{prf}{0}
-\renewcommand{\theprf}{\arabic{section}.\arabic{prf}}
-\newenvironment{prf}[2][]{%
-\refstepcounter{prf}%
-\ifstrempty{#1}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=red!20]
-{\strut Proof~\theprf};}}
-}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=red!20]
-{\strut Proof~\thetheo:~#1};}}%
-}%
-\mdfsetup{innertopmargin=10pt,linecolor=red!20,%
-linewidth=2pt,topline=true,%
-frametitleaboveskip=\dimexpr-\ht\strutbox\relax
-}
-\begin{mdframed}[]\relax%
-\label{#2}}{\end{mdframed}}
 
 \title{联合单目深度估计的深度图像超分辨率重建算法研究}
 \englishtitle{Research on Joint Depth Map Super-Resolution and Monocular Depth Estimation Algorithm}
@@ -487,29 +465,23 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 
 \section{项目总结}
 \subsection{总结归纳}
-\begin{frame}
-	\vspace{-0.3cm}
-	\begin{columns}
-		\begin{column}{0.45\textwidth}
-			\begin{block}{\centering\small 论文及专利}
-				\begin{itemize}
-					\footnotesize
-					\item 发明专利：《一种联合单目深度估计的深度图像超分辨率重建方法》
-					\item 2021 ACM MM（CCF A）：BridgeNet: A Joint Learning Network of Depth Map Super-Resolution and Monocular Depth Estimation
-				\end{itemize}
-			\end{block}
-			\vspace{-0.3cm}
-			\begin{figure}
-				\includegraphics[scale=0.45]{25.png}
-			\end{figure}
-
-		\end{column}
-		\begin{column}{0.45\textwidth}
-			
-		\end{column}
-	
-	\end{columns}
-	
+\begin{frame}[t]
+	\hspace*{-0.4cm}\begin{tikzpicture}
+		\draw[draw=none,fill=bjtublue] (-2,4.5) rectangle(5.3,5.1);
+		\node(blocktitle)[anchor=north west,font={\normalsize}] at({0.3,5.15}) {\color{white}论文及专利};
+		\draw[draw=bjtublue,thick,dotted] (-2,4.45) rectangle(5.3,1.2);
+		\node(blockbody)[below=2mm of blocktitle,font={\footnotesize},align=left] {
+			\begin{varwidth}{0.5\linewidth}\begin{itemize}
+        		\item 发明专利：《一种联合单目深度估计的深度图像超分辨率重建方法》
+        		\item 2021 ACM MM（CCF A）：BridgeNet: A Joint Learning Network of Depth Map Super-Resolution and Monocular Depth Estimation
+    		\end{itemize}\end{varwidth}
+		};
+		\node[below=1mm of blockbody,shift={(-1.6cm,0)}] {\includegraphics[scale=0.44]{25.png}};
+		\node[below=1mm of blockbody,shift={(1.6cm,0)}] {\includegraphics[scale=0.44]{26.png}};
+		
+		\node[right=3cm of blocktitle,shift={(0,-3.2cm)}]{\includegraphics[scale=0.4]{27.png}};
+		
+	\end{tikzpicture}
 \end{frame}
 
 \makebackcover
