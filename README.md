@@ -11,55 +11,55 @@ Beamer Theme for Beijing Jiaotong University
 
 ## 📝 repo 介绍
 
+BJTUBeamer 主题为作者基于本科毕业设计中使用的 PPT 模板制作，旨在提供对应风格的 Beamer 制作方式，可用于学位答辩、课堂演示、学术交流或其他需要演示文稿 的活动，方便地使用 LaTeX 制作含有学校特色的演示文稿。
+
 ## 📑 使用说明
 
 1. 下载这个项目的 zip 包到到本地
-2. 直接对 chapters 文件下的 tex 文件进行修改，对应的摘要、章节内容、附录文件均已经默认生成，在此基础上加以修改即可
-3. 替换 reference/bjtu-bachelor-thesis-reference.bib 内容为论文需要的 bibtex 参考文献
-4. 请使用XeLaTeX编译
-5. *make samplebib & Enjoy*
+2. 直接对 bjtubeamer/main.tex 文件进行修改
+3. 请使用XeLaTeX编译
+4. *make samplebib & Enjoy*
 
 ## 📁 文件结构
 
 <details>
-  <summary>BJTU-Bachelor-Thesis</summary>
+  <summary>BJTU-Beamer</summary>
     <details>
-        <summary>bjtu-bachelor-thesis</summary>
+        <summary>bjtubeamer</summary>
 
-- chapters 正文各章节 tex 文件
-- figures 论文插图
-- reference 参考文献
-- vi 视觉识别/校徽
-- font 字体文件
-- word word 模板
-- bjtu-bachelor-thesis.cls 样式模板
-- main.tex
+- beamerthemebjtubeamer.sty 演示主题
+- beamerinnerthemebjtubeamer.sty 内部主题
+- beamerouterthemebjtubeamer.sty 外部主题
+- beamercolorthemebjtubeamer.sty 色彩主题
+- beamerfontthemebjtubeamer.sty 字体主题
+- resources 主题相关素材文
+- figures 插图
+- main.tex 
 - main.pdf
-    </details>
-    <details>
-        <summary>example</summary>
-使用示例，包括多图排列、表格跨页等
+- bjtubeamer.tex
+- bjtubeamer.pdf 用户手册
+
     </details>
     <details>
         <summary>sample</summary>
-论文排版样例
+slide 排版样例
     </details>
 </details>
 
-|       |                   展示                   |                       展示                        |
-  |:--------------------------------------:|:-----------------------------------------------:| :-----------------------------------------------: |
-  | 预览  |  ![coverpage](preview/coverpage.png)   | ![frontpage_chs](preview/authorizationpage.png) |
-  | 说明  |                  封面页                   |                       授权页                       |
-  | 文件  |              `\makecover`              |              `\makeAuthorization`               |
-  | 预览  | ![frontpage_eng](preview/abstract.png) |    ![abstract_chs](preview/abstract_en.png)     |
-  | 说明  |                  中文摘要                  |                      英文摘要                       |
-  | 文件  |             `abstract.tex`             |              `englishabstract.tex`              |
-  | 预览  |  ![abstract_eng](preview/content.png)  |       ![references](preview/chapter.png)        |
-  | 说明  |                   目录                   |                     正文（部分）                      |
-  | 文件  |           `\tableofcontents`           |                   `chapters/`                   |
-  | 预览  |   ![appendix](preview/reference.png)   |     ![acknowledgements](preview/thanks.png)     |
-  | 说明  |                  参考文献                  |                       致谢                        |
-  | 文件  |  `bjtu-bachelor-thesis-reference.bib`  |                  `thanks.tex`                   |
-  | 预览  |    ![mywork](preview/appendix.png)     |         ![statement](preview/main.png)          |
-  | 说明  |                   附录                   |                     论文模板预览                      |
-  | 文件  |             `appendix.tex`             |                   `main.pdf`                    |
+|       |                 展示                  |                       展示                       |
+  |:-----------------------------------:|:----------------------------------------------:| :-----------------------------------------------: |
+  | 预览  | ![coverpage](preview/coverpage.png) |   ![sectioncover](preview/sectioncover1.png)   |
+  | 说明  |                 封面页                 |                    章节封面（1）                     |
+  | 文件  |            `\makecover`             |                  `\section{}`                  |
+  | 预览  | ![contentpage](preview/content.png) |   ![sectioncover](preview/sectioncover2.png)   |
+  | 说明  |                 目录页                 |                    章节封面（2）                     |
+  | 文件  |           `\makecontent`            |                  `\section{}`                  |
+  | 预览  |     ![frame](preview/frame.png)     |    ![sectioncover](preview/sectioncover3.png)    |
+  | 说明  |                 内容帧                 |                    章节封面（3）                     |
+  | 文件  |    `\begin{frame}……\end{frame}`     |                  `\section{}`                  |
+  | 预览  | ![backcover](preview/backcover.png) | ![sectioncover](preview/sectioncover4.png) |
+  | 说明  |                 封底                  |                    章节封面（4）                     |
+  | 文件  |          `\makebackcover`           |                  `\section{}`                  |
+  | 预览  |     ![beamer](preview/main.png)     |    ![sectioncover](preview/sectioncover5.png)     |
+  | 说明  |             Beamer 主题预览             |                    章节封面（5）                     |
+  | 文件  |             `main.pdf`              |                  `\section{}`                  |
